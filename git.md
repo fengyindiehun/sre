@@ -80,3 +80,22 @@ git push self
 ```
 
 最后你可以在你github上自己的repo里看到你最新的分支，然后提交一个Pull Request到你切出来的分支即可。
+
+## 冲突解决
+
+提交的Pull Request很可能会遇到冲突，这往往是因为你开发新功能的时候主分支发生了一些变更。首先你需要更新本地的主分支
+```
+git checkout master
+git pull
+```
+
+然后切回自己的新功能分支来解决冲突
+```
+git checkout new_feature
+git rebase master
+```
+
+如果有冲突你会进入冲突解决界面里面，根据需要进行调整。解决完冲突后需要强制更新当前分支的内容上去。
+```
+git push self -f
+```
