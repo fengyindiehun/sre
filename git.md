@@ -99,3 +99,7 @@ git rebase master
 ```
 git push self -f
 ```
+
+## 推荐阅读
+
+[git文档](https://git-scm.com/book/zh/v2) 中2、3、7、10章节的内容
