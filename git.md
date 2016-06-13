@@ -103,3 +103,5 @@ git push self -f
 ## 推荐阅读
 
 [git文档](https://git-scm.com/book/zh/v2) 中2、3、7、10章节的内容
+
+看完git文档后，请分享一个，并且提一个PR到这个repo来。
