@@ -58,9 +58,10 @@ git checkout master
 git pull
 ```
 
-更新完master后，切到一个新的分支开始功能开发
+更新完master后，先创建一个新分支new_feature，然后切到new_feature开始功能开发
 
 ```
+git branch new_feature
 git checkout new_feature
 ```
 
