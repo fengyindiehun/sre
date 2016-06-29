@@ -27,24 +27,18 @@ func (t *T) g() {
 	fmt.Println(t.i)
 }
 func main() {
-	var t T
-	t = T{1}
-	fmt.Println(t)
-	var tt *T
-	tt = &t
-	fmt.Println(tt)
-	var ttt **T
-	ttt = &tt
-	fmt.Println(ttt)
-	var tttt ***T
-	tttt = &ttt
-	fmt.Println(tttt)
-	fmt.Println(t.i)
-	fmt.Println(tt.i)
+	t := T{1}
+	tt := &t
+	ttt := &tt
+	tttt := &ttt
+	fmt.Println(t, tt, ttt, tttt)
+	fmt.Println(t.i, tt.i) // compile error: ttt.i, tttt.i
 	t.f()
 	tt.f()
+	// compile error: ttt.f(), tttt.f()
 	t.g()
 	tt.g()
+	// compile error: ttt.g(), tttt.g()
 }
 ```
 
@@ -72,7 +66,6 @@ func main() {
 		} else {
 			ch[i] = ch[i-1]
 		}
-		i := i
 		go func() {
 			ch[i] <- i
 		}()
@@ -87,9 +80,16 @@ func main() {
 
 ## 并发控制
 
-- chan Type
-  - chan Type 是可读可写的，<-chan Type 是只读的，chan<- Type 是只写的
+- 阅读列表
+  - [Go并发模式：管道和取消](https://segmentfault.com/a/1190000000437463)
+	- [goroutine背后的系统知识](http://www.infoq.com/cn/articles/knowledge-behind-goroutine)
 
-- Go routine
+- `chan Type`
+  - `chan Type` 是可读可写的，`<-chan Type` 是只读的，`chan<- Type` 是只写的。
+	- `make(chan bool, 3)` 带有长度为 3 的缓冲区，读未准备好时，可以一直写，直到缓冲区满；写为准备好时，读会阻塞。
+	- `make(chan bool)` 没有缓冲区，读和写必须都准备好，否则就被阻塞。
+	- Close 后的 chan 也是可以读的，读出的是默认值。
+
+- Goroutine
   - Go 的 main 线程结束的时候，即便有仍在 block 的其它线程，也会一并都退出。
-  
+	- Goroutine 最终会落到运行时的线程池中。
