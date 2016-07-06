@@ -2,6 +2,11 @@
 
 这里记录 Golang 学习过程中的一些意想不到的特点，如果不注意，按照平时其它语言的习惯来，很可能会踩坑。
 
+## 代码规范
+- 规范了包含各种命名、错误处理流程、函数参数、返回值、指针类型 OR 值类型等
+  - [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
+  - [Twelve Go Best Practices](https://talks.golang.org/2013/bestpractices.slide#1)
+
 ## 堆、栈
 - Golang 不区分堆空间和栈空间，希望程序员不需要关心这些东西。于是：
   - Golang 的栈空间是可以自动扩容的，不用担心爆栈了。但是经过测试，我本机使用了 1GB 的栈空间的时候，爆炸了。（毕竟要照顾像我这样容易写出无限递归的程序员）
