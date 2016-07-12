@@ -2,6 +2,9 @@
 
 这里记录 Golang 学习过程中的一些意想不到的特点，如果不注意，按照平时其它语言的习惯来，很可能会踩坑。
 
+## 书
+- [Go 学习笔记](https://github.com/qyuhen/book)
+
 ## 代码规范
 - 规范了包含各种命名、错误处理流程、函数参数、返回值、指针类型 OR 值类型等
   - [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
