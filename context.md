@@ -146,6 +146,6 @@ context 包其实是很自然的一种解决方案。问题来自于 Goroutine �
 
 所以 context 这个词，直译是“上下文”，应该就是进程树中的上下文环境的意思，子进程能访问父进程的 Value map。
 
-context 包现在越来越通用了，Go 1.6 中的 http 包中的 cancel 方案，已经不推荐使用了。context 包里封装了一份 http 的包，使用的是 context 的解决方案。未来应该会纳入标准库。
+context 包现在越来越通用了，Go 1.6 http 包中的 cancel 方案，已经不推荐使用了。context 包里封装了一份 http 的包，使用的是 context 的解决方案。未来应该会纳入标准库。
 
-更多的 context 的内容，可以直接读 context 源码。
+更多的 context 的内容，可以直接读 context 源码。如果得到你的反馈，我会很开心 =)。
