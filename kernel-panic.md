@@ -230,6 +230,21 @@ a divide by zero error
 >
 * pstate 的新的功率驱动程序将会在以下的驱动程序之前自动为现代的 Intel CPU 启用。该驱动会优先于其他的驱动程序，因为它是内置驱动，而不是作为一个模块来加载。该驱动自动作用于 Sandy Bridge 和 Ivy Bridge 这两个类型的 CPU。如果您在使用这个驱动的时候遇到问题，建议您在 Grub 的内核参数中对其禁用（即修改 `/etc/default/grub` 文件，在 `GRUB_CMDLINE_LINUX_DEFAULT=` 后添加 `intel_pstate=disable`）。
 
+## 0x23 后语
+
+关闭了`P-State`后，内核层面失去了控制硬件CPU频率的接口，不再对CPU的频率进行控制。根据下图我们可以看到在我们禁用这个模块前，CPU的频率受`P-State`的控制，同时turbo被打开，一直处于一个2.6GHz的水平。禁用后CPU频率不再受`P-State`控制，之前使用`P-State`打开的turbo也停止工作，最终频率稳定的工作在CPU的默认配置2.4GHz。
+
+![CPU-Clock](https://raw.githubusercontent.com/eleme/sre/master/images/cpu-clock.png)
+
+## 0x24 疑问
+
+时间有限，不能投入太多的时间用于继续追杀这个问题。虽然问题找到了解决方案，但是整个debug过程中依然有些疑点没有深入去了解：
+
+1. 0x12的log中看到是还有一个`apic_timer_interrupt`的异常。
+2. 官方提供的patch中虽然修复了除0的bug，但是实际上我们的dump中`last_sample_time`早就已经发生了溢出，进而才导致了最终出现除0。但是`last_sample_time`的问题官方也没有去解决，所以kernel中可能还隐藏有另一个bug没修。
+3. 在 `P-State` 控制下的CPU频率有的稳定，有的不稳定，会处于抖动状态。
+
+
 ### reference
 
 [1] [[PATCH] cpufreq, Fix overflow in busy_scaled due to long delay](https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/drivers/cpufreq/intel_pstate.c?id=7180dddf7c32c49975c7e7babf2b60ed450cb760)
