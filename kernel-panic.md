@@ -236,6 +236,80 @@ a divide by zero error
 
 ![CPU-Clock](https://raw.githubusercontent.com/eleme/sre/master/images/cpu-clock.png)
 
+通过基准测试套件`unixbench`对比`intel_pstate=disable`前后性能变化非常小.
+
+前:
+
+```
+Benchmark Run: Mon Aug 08 2016 14:28:49 - 14:56:54
+24 CPUs in system; running 1 parallel copy of tests
+
+Dhrystone 2 using register variables       30692375.7 lps   (10.0 s, 7 samples)
+Double-Precision Whetstone                     3840.3 MWIPS (9.9 s, 7 samples)
+Execl Throughput                               4143.8 lps   (30.0 s, 2 samples)
+File Copy 1024 bufsize 2000 maxblocks        913341.5 KBps  (30.0 s, 2 samples)
+File Copy 256 bufsize 500 maxblocks          239488.5 KBps  (30.0 s, 2 samples)
+File Copy 4096 bufsize 8000 maxblocks       2143348.6 KBps  (30.0 s, 2 samples)
+Pipe Throughput                             1628899.6 lps   (10.0 s, 7 samples)
+Pipe-based Context Switching                 160517.9 lps   (10.0 s, 7 samples)
+Process Creation                              11188.7 lps   (30.0 s, 2 samples)
+Shell Scripts (1 concurrent)                   8369.8 lpm   (60.0 s, 2 samples)
+Shell Scripts (8 concurrent)                   4390.3 lpm   (60.0 s, 2 samples)
+System Call Overhead                        2486206.1 lps   (10.0 s, 7 samples)
+
+System Benchmarks Index Values               BASELINE       RESULT    INDEX
+Dhrystone 2 using register variables         116700.0   30692375.7   2630.0
+Double-Precision Whetstone                       55.0       3840.3    698.2
+Execl Throughput                                 43.0       4143.8    963.7
+File Copy 1024 bufsize 2000 maxblocks          3960.0     913341.5   2306.4
+File Copy 256 bufsize 500 maxblocks            1655.0     239488.5   1447.1
+File Copy 4096 bufsize 8000 maxblocks          5800.0    2143348.6   3695.4
+Pipe Throughput                               12440.0    1628899.6   1309.4
+Pipe-based Context Switching                   4000.0     160517.9    401.3
+Process Creation                                126.0      11188.7    888.0
+Shell Scripts (1 concurrent)                     42.4       8369.8   1974.0
+Shell Scripts (8 concurrent)                      6.0       4390.3   7317.2
+System Call Overhead                          15000.0    2486206.1   1657.5
+                                                                   ========
+System Benchmarks Index Score                                        1581.0
+```
+
+后:
+
+```
+Benchmark Run: Mon Aug 08 2016 15:15:36 - 15:43:41
+24 CPUs in system; running 1 parallel copy of tests
+
+Dhrystone 2 using register variables       30671853.5 lps   (10.0 s, 7 samples)
+Double-Precision Whetstone                     3837.8 MWIPS (9.9 s, 7 samples)
+Execl Throughput                               4075.8 lps   (30.0 s, 2 samples)
+File Copy 1024 bufsize 2000 maxblocks        923975.8 KBps  (30.0 s, 2 samples)
+File Copy 256 bufsize 500 maxblocks          241757.9 KBps  (30.0 s, 2 samples)
+File Copy 4096 bufsize 8000 maxblocks       2219859.9 KBps  (30.0 s, 2 samples)
+Pipe Throughput                             1623321.7 lps   (10.0 s, 7 samples)
+Pipe-based Context Switching                 160197.8 lps   (10.0 s, 7 samples)
+Process Creation                              11004.0 lps   (30.0 s, 2 samples)
+Shell Scripts (1 concurrent)                   8376.0 lpm   (60.0 s, 2 samples)
+Shell Scripts (8 concurrent)                   4395.4 lpm   (60.0 s, 2 samples)
+System Call Overhead                        2477794.6 lps   (10.0 s, 7 samples)
+
+System Benchmarks Index Values               BASELINE       RESULT    INDEX
+Dhrystone 2 using register variables         116700.0   30671853.5   2628.3
+Double-Precision Whetstone                       55.0       3837.8    697.8
+Execl Throughput                                 43.0       4075.8    947.8
+File Copy 1024 bufsize 2000 maxblocks          3960.0     923975.8   2333.3
+File Copy 256 bufsize 500 maxblocks            1655.0     241757.9   1460.8
+File Copy 4096 bufsize 8000 maxblocks          5800.0    2219859.9   3827.3
+Pipe Throughput                               12440.0    1623321.7   1304.9
+Pipe-based Context Switching                   4000.0     160197.8    400.5
+Process Creation                                126.0      11004.0    873.3
+Shell Scripts (1 concurrent)                     42.4       8376.0   1975.5
+Shell Scripts (8 concurrent)                      6.0       4395.4   7325.7
+System Call Overhead                          15000.0    2477794.6   1651.9
+                                                                   ========
+System Benchmarks Index Score                                        1582.9
+```
+
 ## 0x24 疑问
 
 时间有限，不能投入太多的时间用于继续追杀这个问题。虽然问题找到了解决方案，但是整个debug过程中依然有些疑点没有深入去了解：
