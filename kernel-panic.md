@@ -318,6 +318,12 @@ System Benchmarks Index Score                                        1582.9
 2. 官方提供的patch中虽然修复了除0的bug，但是实际上我们的dump中`last_sample_time`早就已经发生了溢出，进而才导致了最终出现除0。但是`last_sample_time`的问题官方也没有去解决，所以kernel中可能还隐藏有另一个bug没修。
 3. 在 `P-State` 控制下的CPU频率有的稳定，有的不稳定，会处于抖动状态。
 
+关于问题2,作者已经给出了表述.
+
+>>
+ and found last_sample_time = { tv64 = -131888820469800 }.
+>
+ This doesn't make sense.  last_sample_time is a u64 field, so it can't be negative.
 
 ### reference
 
