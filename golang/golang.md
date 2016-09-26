@@ -2,10 +2,20 @@
 
 这里记录 Golang 学习过程中的一些意想不到的特点，如果不注意，按照平时其它语言的习惯来，很可能会踩坑。
 
-## 书
+## 推荐阅读
+
 - [Go 学习笔记](https://github.com/qyuhen/book)
+- [The Go Spec](https://golang.org/ref/spec) - The Go Programming Language Specification.
+- [Effective Go](https://golang.org/doc/effective_go.html) - A good collection of Go advice.
+
+## 推荐的工具
+
+- [godep](https://github.com/tools/godep) - Used for Kubernetes dependency management.
+- [Go Version Manager](https://github.com/moovweb/gvm) - A handy tool for managing Go versions.
+- [godepq](https://github.com/google/godepq) - A tool for analyzing go import trees.
 
 ## 代码规范
+
 - 规范了包含各种命名、错误处理流程、函数参数、返回值、指针类型 OR 值类型等
   - [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
   - [Twelve Go Best Practices](https://talks.golang.org/2013/bestpractices.slide#1)
@@ -19,6 +29,7 @@
 - Golang 的指针共享实体的成员函数，所以没有 -> 操作符，统一使用 .（点）操作符。
   - 但是这只包括实体和一级引用，涉及到更高级别的引用，仍然需要 explicit dereference。
   - 见下面的代码：
+  
 ```go
 package main
 
@@ -60,6 +71,7 @@ func main() {
   - 不可变类型无需关心
 
 -  下面的代码包含一处运行时错误
+
 ```go
 package main
 
