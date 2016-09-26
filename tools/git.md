@@ -65,6 +65,12 @@ git branch new_feature
 git checkout new_feature
 ```
 
+较好的实践是:
+
+```
+git checkout -b new_feature
+```
+
 在这个新的功能分支你会做一些功能的开发，每做一个小的功能点就commit一下，保证commit的原子性能方便其他人来review你的代码。
 
 ```
